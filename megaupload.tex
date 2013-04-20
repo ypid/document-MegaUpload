@@ -1,0 +1,108 @@
+%% <school/Epochenheft.tex> template 1.1.1 by Robin `ypid` Schneider <ypid23@aol.de>
+%% The current version can be found on: https://github.com/ypid/typesetting/blob/master/templates/school/Epochenheft.tex
+%%% preamble
+%\RequirePackage{snapshot}		%% \jobname.dep
+%\listfiles %% listfiles to logfile
+\RequirePackage{RequirePackageRS}
+\documentclass[12pt,a4paper,ngerman,numbers=noenddot,toc=listof]{scrartcl}	%% ,draft,pointednumbers,
+%\usepackage[nohyperlinks,nolist]{acronym}		% nolist,withpage,footnote %% Abkürzungsverzeichnis
+\usepackage{
+	physicsRS,
+	scrartclRS,
+	defaultRS,
+%	literatureRS,
+%	debugRS,
+	timeRS,
+	graphicRS,
+%	mathematicsRS,
+%	gamesRS,
+	layoutRS,
+	footingRS,
+	extensionsRS,
+	docExtensionsRS,
+	schoolRS,
+%	chemistryRS,
+}
+\usepackage[
+	style=numeric,
+%	style=alphabetic,sorting=anyt,
+%	style=authoryear,
+%	style=authortitle,
+%	style=authortitle-comp,
+%	style=verbose,
+%	style=verbose-note,
+%	style=verbose-trad1,
+%	style=verbose-trad2,
+%	style=reading,
+%	style=draft,
+%	sorting=nty,			%% Wegen Umbruch in einer URL (alles dazwischen wurde auch verlinkt)
+	natbib=true,
+	backend=biber,
+]{biblatex}
+\DeclareFieldFormat{urldate}{\mkbibparens{abgerufen am\space#1}}
+\defbibheading{quell}{\section{Quellenverzeichnis}}
+\bibliography{files/header/bibliographie}
+%% specific indications
+\readgitstat{7}
+\SetAUTHOR{1}{}
+\SetTITEL{MegaUpload}
+\SetKLASSE{12}
+\SetSUBJECT{Wirtschaftsgeographie}
+\choosedefaultlicense
+\SetURL{http://ypid.files.wordpress.com/2013/04//megaupload.pdf}
+\SetGitURL{https://github.com/ypid/document-MegaUpload}
+%\renewcommand{\licenseadd}{, mit Ausnahme der Bilder,\xspace}
+\SetCREATEDATE{2012}{02}{10}{19}{14}{17}		%% {YYYY}{MM}{DD}{HH}{MM}{SS}
+\SetABGABEDATUM{2}{2012}{02}{17}{1}
+\usepackage{
+	schoolPDFinfoRS,
+	tableRS,
+}
+\SetDraft{on}
+\geometry{left=2cm, right=2cm,top=2.5cm, bottom=3.5cm}
+%%% body
+\begin{document}
+\title{\TITEL}
+\author{\AUTHOR}
+\date{\ABGABEDATUM}
+\maketitle
+
+\input{files/chapters/content}
+
+\setcounter{sectionsV}{\value{section}}		%% Speichert die sectionnummer vor \appendix zwischen
+\appendix	%% Sorgt für Buchstaben im Inhaltsverzeichnis
+
+\nocite{*}\newpage
+\printbibliography[heading=quell]
+
+\begin{description}
+	\item[Weitergehende Links:]~
+	\begin{itemize}
+		\item Audio Podcast: \href{http://chaosradio.ccc.de/cr175.html}{CR175 R.I.P. Filesharing?}
+			(Zur Geschichte von Filesharing unter Einbeziehung der aktuellen Ereignisse.
+			Dabei wird auch Kim Schmitz näher Charakterisiert.)
+	\end{itemize}
+\end{description}
+
+\vfill
+\printURLlong
+\printlicense
+\printendsignature
+%\ifDraft{
+  \newpage\Statistiken
+  Status:~\progressbar{1} (eigenes Ermessen)
+%}{}
+  \begin{landscape}
+	\pagestyle{empty}
+   \begin{sourcefiletable}{1}
+	\Isourcefile{Hauptdatei}{\jobname.tex}
+%	\sourcefile{Metainformationen}{files/metainfos.tex}
+%	\sourcefile{Titelseite}{files/titlepage.tex}
+	\Isourcefile{Inhalt}{files/chapters/content.tex}
+	\Isourcefile{Literatur-Datenbank}{files/header/bibliographie.bib}
+   \end{sourcefiletable}
+	\pagestyle{empty}
+	\printVersionNotes
+  \end{landscape}
+%	\listoffixmes
+\end{document}
